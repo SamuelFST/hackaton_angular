@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http'
 import { environment } from 'src/environments/environment';
 import User from '../Objects/User';
 import UserRegister from '../Objects/UserRegister';
+import Provider from '../Objects/Provider';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,10 @@ export class UserService {
 
   findById = (id: number) => {
     return this.$http.get<User>(`${this.API_URL}/users/${id}`);
+  }
+
+  findAllEmailProviders = () => {
+    return this.$http.get<Provider[]>(`${this.API_URL}/users/providers`);
   }
 
   searchByName = (name: string) => {
