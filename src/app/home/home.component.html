@@ -1,0 +1,132 @@
+<div *ngIf="!userId">
+  <p-toast position="top-right"></p-toast>
+  <p-toolbar styleClass="mb-0 gap-2">
+    <div class="flex align-items-center justify-content-center">
+      <h5 class="m-0" [ngStyle]="{color: 'white'}">GERENCIAR USUÁRIOS</h5>
+    </div>
+    <ng-template pTemplate="left">
+      <div class="p-input-filled">
+        <input type="text" placeholder="Buscar por nome..." class="mr-6" [(ngModel)]="nameSearch"
+          (change)="searchByName()" pInputText />
+      </div>
+      <button pButton pRipple label="Novo usuário" icon="pi pi-plus" class="p-button-success mr-2"
+        (click)="openNew()"></button>
+    </ng-template>
+  </p-toolbar>
+  <p-table [columns]="cols" [value]="users" [tableStyle]="{'min-width': '53rem'}">
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th *ngFor="let col of cols">
+          {{col.header}}
+        </th>
+        <th>
+          Editar
+        </th>
+        <th>
+          Excluir
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr>
+        <td *ngFor="let col of cols">
+          {{rowData[col.field]}}
+        </td>
+        <td>
+          <button pButton type="button" class="p-button-info" label="Editar" icon="pi pi-pencil" iconPos="right"
+            (click)="changeToUpdateUserComponent(rowData.id)">
+          </button>
+        </td>
+        <td>
+          <button pButton type="button" class="p-button-danger" label="Excluir" icon="pi pi-trash" iconPos="right"
+            (click)="deleteUser(rowData.id)">
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <p-dialog [(visible)]="userDialog" [style]="{width: '450px'}" header="Dados do usuário" [modal]="true"
+    styleClass="p-fluid">
+    <ng-template pTemplate="content">
+      <div class="flex flex-column p-inputtext-lg">
+        <label for="name" class="mb-2">Nome</label>
+        <input type="text" pInputText id="name" [(ngModel)]="user.name" required autofocus />
+        <small class="p-error" *ngIf="submitted && !user.name">Nome é obrigatório</small>
+        <label for="login" class="mt-4 mb-2">Login</label>
+        <input type="text" pInputText id="login" [(ngModel)]="user.login" required />
+        <small class="p-error" *ngIf="submitted && !user.login">Login é obrigatório</small>
+        <label for="email" class="mt-4 mb-2">E-mail</label>
+        <input id="email" pInputText type="text" [(ngModel)]="user.email" required />
+        <small class="p-error" *ngIf="submitted && !user.email">E-mail é obrigatório</small>
+        <label for="password" class="mt-4 mb-2">Senha</label>
+        <input type="password" id="password" pPassword promptLabel="Digite uma senha" weakLabel="Fraca"
+          mediumLabel="Média" strongLabel="Forte" [(ngModel)]="user.password" />
+        <small class="p-error" *ngIf="submitted && !user.password">Senha é obrigatória</small>
+        <label for="basic" class="mt-4 mb-2">Data de Nascimento</label>
+        <p-calendar inputId="basic" [(ngModel)]="user.dateBirth" dateFormat="dd/mm/yy"></p-calendar>
+        <small class="p-error" *ngIf="submitted && !user.dateBirth">Data de nascimento é obrigatória</small>
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+      <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text" [ngStyle]="{color: 'red'}"
+        (click)="hideDialog()">
+      </button>
+      <button pButton pRipple label="Salvar usuário" icon="pi pi-check" class="p-button-text"
+        [ngStyle]="{color: 'green'}" (click)="saveUser()">
+      </button>
+    </ng-template>
+  </p-dialog>
+
+  <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+</div>
+
+<div *ngIf="userId && userToUpdate?.exists" class="pt-5">
+  <p-toast position="top-right"></p-toast>
+  <div class="p-fluid p-5 m-auto border-round-md" style="width: 35rem; background-color: #2a323d; color: white;">
+    <span style="font-weight: 600; font-size: 1.25rem;">Editar usuário</span>
+    <hr class="mt-3">
+    <div class="p-field mb-3 mt-3">
+      <label for="name">Nome</label>
+      <input type="text" class="mt-1" pInputText id="name" [value]="userToUpdate.name" [(ngModel)]="userToUpdate.name"
+        required autofocus />
+      <small class="p-error" *ngIf="!userToUpdate.name">Nome é obrigatório</small>
+    </div>
+    <div class="p-field mb-3">
+      <label for="login">Login</label>
+      <input type="text" class="mt-1" pInputText id="login" [value]="userToUpdate.login"
+        [(ngModel)]="userToUpdate.login" required />
+      <small class="p-error" *ngIf="!userToUpdate.login">O Login pode ser digitado o mesmo utilizado anteriormente, ou
+        um
+        novo</small>
+    </div>
+    <div class="p-field mb-3">
+      <label for="email">E-mail</label>
+      <input id="email" class="mt-1" pInputText type="text" [value]="userToUpdate.email"
+        [(ngModel)]="userToUpdate.email" required />
+      <small class="p-error" *ngIf="!userToUpdate.email">E-mail é obrigatório</small>
+    </div>
+    <div class="p-field mb-3">
+      <label for="password">Senha</label>
+      <input type="password" class="mt-1" id="password" pPassword promptLabel="Digite uma senha" weakLabel="Fraca"
+        mediumLabel="Média" strongLabel="Forte" [(ngModel)]="userToUpdate.password" [value]="userToUpdate.password" />
+      <small class="p-error" *ngIf="!user.password">A senha pode ser digitada a mesma utilizada anteriormente, ou uma
+        nova</small>
+    </div>
+    <div class="p-field mb-5">
+      <label for="basic">Data de Nascimento</label>
+      <p-calendar inputId="basic" [(ngModel)]="userToUpdate.dateBirth" dateFormat="dd/mm/yy"></p-calendar>
+      <small class="p-error" *ngIf="!userToUpdate.dateBirth">Data de nascimento é obrigatória</small>
+    </div>
+    <hr class="mb-5">
+    <div class="flex flex-row">
+      <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text" [ngStyle]="{color: 'red'}"
+        (click)="returnToHome()">
+      </button>
+      <button pButton pRipple label="Salvar alterações" icon="pi pi-check" class="p-button-text"
+        [ngStyle]="{color: 'green'}" (click)="updateUser(userId)">
+      </button>
+    </div>
+  </div>
+</div>
