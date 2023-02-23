@@ -27,6 +27,10 @@ export class UserService {
     return this.$http.get<Provider[]>(`${this.API_URL}/users/providers`);
   }
 
+  findAllBirthdayUsers = (month: number) => {
+    return this.$http.get<User[]>(`${this.API_URL}/users/birthdays/${month}`);
+  }
+
   searchByName = (name: string) => {
     return this.$http.get<User[]>(`${this.API_URL}/users?name=${name}`);
   }

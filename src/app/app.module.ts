@@ -20,6 +20,7 @@ import { HomeComponent } from './home/home.component';
 import { UserService } from './services/user.service';
 import { MenuComponent } from './menu/menu.component';
 import { ProvidersComponent } from './providers/providers.component';
+import { BirthdaysComponent } from './birthdays/birthdays.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ProvidersComponent } from './providers/providers.component';
     HomeComponent,
     MenuComponent,
     ProvidersComponent,
+    BirthdaysComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,30 @@
+<p-toolbar styleClass="mb-0 gap-2">
+  <div class="flex align-items-center justify-content-center">
+    <h5 class="m-0" [ngStyle]="{color: 'white'}">USUÁRIOS ANIVERSARIANTES</h5>
+  </div>
+  <ng-template pTemplate="left">
+    <h6 [ngStyle]="{color: 'white'}" class="mr-5">TOTAL DE ANIVERSARIANTES DO MÊS: {{totalBirthdays}}</h6>
+    <div class="p-input-filled">
+      <input type="text" placeholder="Buscar por número do mês..." class="mr-1" [(ngModel)]="monthNumber"
+        (change)="searchByMonthNumber()" pInputText />
+    </div>
+  </ng-template>
+</p-toolbar>
+<p-table [columns]="" [value]="birthdayUsers" [tableStyle]="{'min-width': '53rem'}">
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th>Nome</th>
+      <th>Data de nascimento</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-birthdayUsers let-columns="columns">
+    <tr>
+      <td>
+        {{birthdayUsers.name}}
+      </td>
+      <td>
+        {{birthdayUsers.dateBirth}}
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
