@@ -1,0 +1,22 @@
+<p-toolbar styleClass="mb-0 gap-2">
+  <div class="flex align-items-center justify-content-center">
+    <h5 class="m-0" [ngStyle]="{color: 'white'}">PROVEDORES DE E-MAIL DOS USUÁRIOS</h5>
+  </div>
+  <ng-template pTemplate="left">
+    <h5 [ngStyle]="{color: 'white'}">TOTAL DE PROVEDORES: {{totalProviders}}</h5>
+  </ng-template>
+</p-toolbar>
+<p-table [value]="providers" [tableStyle]="{'min-width': '53rem'}">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>
+        Nome do provedor
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-provider>
+    <tr>
+      <td>{{provider.provider_name}}</td>
+    </tr>
+  </ng-template>
+</p-table>
