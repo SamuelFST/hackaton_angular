@@ -28,6 +28,7 @@ export class BirthdaysComponent implements OnInit {
   searchByMonthNumber = () => {
     this.userService.findAllBirthdayUsers(this.monthNumber).subscribe((birthdayUsers) => {
       this.birthdayUsers = birthdayUsers;
+      this.totalBirthdays = birthdayUsers.length;
     });
   }
 }
