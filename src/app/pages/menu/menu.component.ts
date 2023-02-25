@@ -18,4 +18,9 @@ export class MenuComponent implements OnInit {
   navigateToPage = (page: string) => {
     this.router.navigate([page]);
   }
+
+  logout = () => {
+    localStorage.removeItem('isLogged');
+    this.router.navigate(['/login']);
+  }
 }

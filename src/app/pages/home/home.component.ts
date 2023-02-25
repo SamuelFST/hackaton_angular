@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
 
-import User from '../Objects/User';
-import UserRegister from '../Objects/UserRegister';
-import { UserService } from '../services/user.service';
+import User from '../../Objects/User';
+import UserRegister from '../../Objects/UserRegister';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-home',

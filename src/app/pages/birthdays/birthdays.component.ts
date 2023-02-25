@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import User from '../Objects/User';
-import { UserService } from '../services/user.service';
+import User from '../../Objects/User';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-birthdays',
