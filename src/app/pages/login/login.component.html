@@ -1,0 +1,57 @@
+<div class="pt-5">
+  <p-toast position="top-right"></p-toast>
+  <div class="p-fluid p-5 m-auto border-round-md" style="width: 35rem; background-color: #2a323d; color: white;">
+    <span style="font-weight: 600; font-size: 1.25rem;">Login</span>
+    <hr class="mt-3">
+    <div class="p-field mb-3 mt-3">
+      <label for="login">Login</label>
+      <input type="text" class="mt-1" pInputText id="login" [(ngModel)]="loginRequest.login" required autofocus />
+      <small class="p-error" *ngIf="!loginRequest?.login">Login precisa ser informado</small>
+    </div>
+    <div class="p-field mb-3">
+      <label for="password">Senha</label>
+      <input type="password" [feedback]="false" class="mt-1" id="password" pPassword promptLabel="Digite sua senha" [(ngModel)]="loginRequest.password" />
+      <small class="p-error" *ngIf="!loginRequest.password">A senha precisa ser informada</small>
+    </div>
+    <hr class="mb-5">
+    <div class="flex">
+      <button pButton pRipple label="Entrar" class="p-button-text"
+        [ngStyle]="{color: 'green'}" (click)="authenticate()" [disabled]="!loginRequest.login || !loginRequest.password">
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="pt-5">
+  <p-toast position="top-right"></p-toast>
+  <div class="p-fluid p-5 m-auto border-round-md" style="width: 35rem; background-color: #2a323d; color: white;">
+    <span style="font-weight: 600; font-size: 1.25rem;">Editar usuário</span>
+    <hr class="mt-3">
+    <div class="p-field mb-3 mt-3">
+      <label for="name">Nome</label>
+      <input type="text" class="mt-1" pInputText id="name"
+        required autofocus />
+        <small class="p-error" *ngIf="!login.login">Login precisa ser informado</small>
+    </div>
+    <div class="p-field mb-3">
+      <label for="login">Login</label>
+      <input type="text" class="mt-1" pInputText id="login" required />
+    </div>
+    <div class="p-field mb-3">
+      <label for="email">E-mail</label>
+      <input id="email" class="mt-1" pInputText type="text" required />
+    </div>
+    <div class="p-field mb-3">
+      <label for="password">Senha</label>
+      <input type="password" class="mt-1" id="password" pPassword promptLabel="Digite uma senha" weakLabel="Fraca"
+        mediumLabel="Média" strongLabel="Forte" />
+    </div>
+    <div class="p-field mb-5">
+      <label for="basic">Data de Nascimento</label>
+      <p-calendar inputId="basic" dateFormat="dd/mm/yy"></p-calendar>
+    </div>
+    <hr class="mb-5">
+    <div class="flex flex-row">
+    </div>
+  </div>
+</div> -->

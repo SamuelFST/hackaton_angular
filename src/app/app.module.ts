@@ -16,11 +16,13 @@ import { ToastModule } from 'primeng/toast';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './pages/home/home.component';
 import { UserService } from './services/user.service';
-import { MenuComponent } from './menu/menu.component';
-import { ProvidersComponent } from './providers/providers.component';
-import { BirthdaysComponent } from './birthdays/birthdays.component';
+import { MenuComponent } from './pages/menu/menu.component';
+import { ProvidersComponent } from './pages/providers/providers.component';
+import { BirthdaysComponent } from './pages/birthdays/birthdays.component';
+import { LoginComponent } from './pages/login/login.component';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import { BirthdaysComponent } from './birthdays/birthdays.component';
     MenuComponent,
     ProvidersComponent,
     BirthdaysComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,6 +52,7 @@ import { BirthdaysComponent } from './birthdays/birthdays.component';
   ],
   providers: [
     UserService,
+    AuthService,
   ],
   bootstrap: [AppComponent]
 })
